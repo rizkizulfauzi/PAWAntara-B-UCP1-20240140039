@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <main class="section">
+    <p class="eyebrow">Papan harga</p>
+    <h1>Semua Produk</h1>
+
+    <form method="GET" action="/produk" class="filter-bar" aria-label="Filter produk">
+      <div class="filter-bar__search">
+        <label for="search" class="sr-only">Cari produk</label>
+        <input
+          type="text"
+          id="search"
+          name="search"
+          value="<%= searchQuery %>"
+          placeholder="Cari produk, mis. beras"
+        />
+      </div>
+
+      <div class="filter-bar__chips" role="group" aria-label="Filter kategori">
+        <button
+          type="submit"
+          name="kategori"
+          value=""
+          class="chip <%= selectedKategori === '' ? 'chip--active' : '' %>"
+        >Semua</button>
+        <% kategoriList.forEach(function(k) { %>
+          <button
+            type="submit"
+            name="kategori"
+            value="<%= k %>"
+            class="chip <%= selectedKategori === k ? 'chip--active' : '' %>"
+          ><%= k.charAt(0).toUpperCase() + k.slice(1) %></button>
+        <% }); %>
+      </div>
+    </form>
+
+    <% if (produkList.length === 0) { %>
+      <p class="empty-state">Tidak ada produk yang cocok dengan pencarian/filter kamu.</p>
+    <% } else { %>
+      <div class="ticket-grid">
+        <% produkList.forEach(function(p) { %>
+          <article class="ticket">
+            <p class="ticket__label"><%= p.category %></p>
+            <p class="ticket__name"><%= p.name %></p>
+            <p class="ticket__price">Rp<%= p.price.toLocaleString('id-ID') %></p>
+            <p class="ticket__stock <%= p.stock < 10 ? 'ticket__stock--low' : '' %>">
+              <%= p.stock < 10 ? 'Stok terbatas · ' : 'Stok aman · ' %><%= p.stock %> <%= p.unit %>
+            </p>
+            <a href="/produk/<%= p.id %>" class="ticket__link">Lihat detail →</a>
+          </article>
+        <% }); %>
+      </div>
+    <% } %>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

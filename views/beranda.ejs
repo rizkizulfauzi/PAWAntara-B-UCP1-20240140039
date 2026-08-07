@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <main>
+    <section class="hero">
+      <div class="hero__content">
+        <h1>Sembako Lengkap, Tinggal Klik</h1>
+        <p>
+          Pantau stok &amp; harga terbaru langsung dari toko, atau tanyakan
+          kebutuhanmu ke fitur Tanya AI kami.
+        </p>
+        <a href="/produk" class="btn-utama">Jelajahi Produk</a>
+      </div>
+    </section>
+
+    <section class="section-wrap" aria-labelledby="unggulan-title">
+      <h2 id="unggulan-title">Produk Unggulan</h2>
+      <div class="daftar-produk">
+        <% unggulan.forEach(function(p) { %>
+          <article class="kartu-produk">
+            <span class="kartu-produk__kategori"><%= p.kategori %></span>
+            <h3><%= p.nama %></h3>
+            <p class="kartu-produk__harga">Rp<%= p.harga.toLocaleString('id-ID') %> <small>/ <%= p.satuan %></small></p>
+            <p class="kartu-produk__stok">Stok: <%= p.stok %></p>
+            <a href="/produk/<%= p.id %>" class="btn-sekunder">Detail</a>
+          </article>
+        <% }); %>
+      </div>
+    </section>
+
+    <section class="section-wrap section-alt">
+      <h2>Kenapa Pilih Ariesta Mart?</h2>
+      <div class="grid-fitur">
+        <article class="kotak-fitur">
+          <h3>🔄 Update Setiap Hari</h3>
+          <p>Harga dan stok dikontrol langsung oleh pemilik toko.</p>
+        </article>
+        <article class="kotak-fitur">
+          <h3>🤖 Tanya AI</h3>
+          <p>Jawaban cepat untuk pertanyaan seputar toko, kapan saja.</p>
+        </article>
+        <article class="kotak-fitur">
+          <h3>🛵 Antar Area Sekitar</h3>
+          <p>Layanan antar untuk pelanggan di sekitar lokasi toko.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

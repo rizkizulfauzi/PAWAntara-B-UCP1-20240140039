@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <main>
+    <section class="hero">
+      <div class="hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow">Papan harga hari ini</p>
+          <h1>Belanja sembako,<br />tanpa nunggu balasan WA.</h1>
+          <p class="hero__lead">
+            Lihat stok dan harga terbaru langsung dari toko, atau tanyakan
+            kebutuhanmu ke fitur Tanya AI — jawabannya muncul detik itu juga.
+          </p>
+          <div class="hero__actions">
+            <a href="/produk" class="btn btn--primary">Lihat Papan Harga</a>
+            <a href="/tanya-ai" class="btn btn--ghost">Tanya AI</a>
+          </div>
+        </div>
+
+        <div class="hero__ticket" aria-hidden="true">
+          <div class="ticket ticket--hero">
+            <p class="ticket__label">Produk favorit minggu ini</p>
+            <p class="ticket__name"><%= unggulan[0].name %></p>
+            <p class="ticket__price">Rp<%= unggulan[0].price.toLocaleString('id-ID') %></p>
+            <p class="ticket__stock">Stok <%= unggulan[0].stock %> <%= unggulan[0].unit %></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ticker harga berjalan: signature element -->
+    <div class="ticker" role="marquee" aria-label="Daftar harga berjalan">
+      <div class="ticker__track">
+        <% [...tickerItems, ...tickerItems].forEach(function(p) { %>
+          <span class="ticker__item">
+            <%= p.name %> <strong>Rp<%= p.price.toLocaleString('id-ID') %></strong>
+          </span>
+        <% }); %>
+      </div>
+    </div>
+
+    <section class="section" aria-labelledby="unggulan-heading">
+      <p class="eyebrow">Etalase</p>
+      <h2 id="unggulan-heading">Produk Unggulan</h2>
+
+      <div class="ticket-grid">
+        <% unggulan.forEach(function(p) { %>
+          <article class="ticket">
+            <p class="ticket__label"><%= p.category %></p>
+            <p class="ticket__name"><%= p.name %></p>
+            <p class="ticket__price">Rp<%= p.price.toLocaleString('id-ID') %></p>
+            <p class="ticket__stock">Stok <%= p.stock %> <%= p.unit %></p>
+            <a href="/produk/<%= p.id %>" class="ticket__link">Lihat detail →</a>
+          </article>
+        <% }); %>
+      </div>
+    </section>
+
+    <section class="section section--alt" aria-labelledby="alasan-heading">
+      <p class="eyebrow">Kenapa Ariesta</p>
+      <h2 id="alasan-heading">Belanja lebih tenang</h2>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg>
+          <h3>Stok selalu update</h3>
+          <p>Harga dan stok dikelola langsung oleh pemilik toko, setiap hari.</p>
+        </article>
+        <article class="feature-card">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 1 1-3.8-7.1L21 3l-1 3.6a8.5 8.5 0 0 1 1 4.9z"/></svg>
+          <h3>Tanya AI kapan saja</h3>
+          <p>Pertanyaan seputar jam buka, ongkir, dan stok dijawab otomatis.</p>
+        </article>
+        <article class="feature-card">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="8" width="14" height="10" rx="1.5"/><path d="M17 11h2.6a1 1 0 0 1 .9.6L22 15v3h-5"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="17.5" cy="18.5" r="1.5"/></svg>
+          <h3>Bisa diantar</h3>
+          <p>Layanan antar untuk pelanggan di sekitar area toko.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

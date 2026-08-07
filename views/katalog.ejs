@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <main class="section-wrap">
+    <h1>Katalog Produk</h1>
+
+    <form method="GET" action="/produk" class="form-filter" aria-label="Filter produk">
+      <div class="form-filter__field">
+        <label for="search">Cari nama produk</label>
+        <input
+          type="text"
+          id="search"
+          name="search"
+          value="<%= filterSearch %>"
+          placeholder="mis. gula"
+        />
+      </div>
+
+      <div class="form-filter__field">
+        <label for="kategori">Kategori</label>
+        <select id="kategori" name="kategori">
+          <option value="">Semua</option>
+          <% semuaKategori.forEach(function(k) { %>
+            <option value="<%= k %>" <%= filterKategori === k ? 'selected' : '' %>>
+              <%= k.charAt(0).toUpperCase() + k.slice(1) %>
+            </option>
+          <% }); %>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-utama">Cari</button>
+      <a href="/produk" class="btn-teks">Reset filter</a>
+    </form>
+
+    <% if (daftarProduk.length === 0) { %>
+      <p class="pesan-kosong">Belum ada produk yang cocok dengan pencarianmu.</p>
+    <% } else { %>
+      <div class="daftar-produk daftar-produk--flex">
+        <% daftarProduk.forEach(function(p) { %>
+          <article class="kartu-produk">
+            <span class="kartu-produk__kategori"><%= p.kategori %></span>
+            <h2><%= p.nama %></h2>
+            <p class="kartu-produk__harga">Rp<%= p.harga.toLocaleString('id-ID') %> <small>/ <%= p.satuan %></small></p>
+            <p class="kartu-produk__stok">Stok: <%= p.stok %></p>
+            <a href="/produk/<%= p.id %>" class="btn-sekunder">Lihat Detail</a>
+          </article>
+        <% }); %>
+      </div>
+    <% } %>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

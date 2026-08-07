@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <main class="section section--narrow">
+    <% if (notFound) { %>
+      <section class="not-found" aria-label="Produk tidak ditemukan">
+        <p class="eyebrow">404</p>
+        <h1>Produk tidak ditemukan</h1>
+        <p>Produk yang kamu cari tidak ada di papan harga kami, atau sudah dihapus.</p>
+        <a href="/produk" class="btn btn--primary">Kembali ke Papan Harga</a>
+      </section>
+    <% } else { %>
+      <nav aria-label="breadcrumb" class="breadcrumb">
+        <a href="/">Beranda</a><span> / </span>
+        <a href="/produk">Produk</a><span> / </span>
+        <span><%= produk.name %></span>
+      </nav>
+
+      <article class="detail">
+        <div class="detail__ticket">
+          <p class="ticket__label"><%= produk.category %></p>
+          <p class="ticket__price ticket__price--xl">Rp<%= produk.price.toLocaleString('id-ID') %></p>
+          <p class="ticket__stock <%= produk.stock < 10 ? 'ticket__stock--low' : '' %>">
+            <%= produk.stock < 10 ? 'Stok terbatas' : 'Stok aman' %> · <%= produk.stock %> <%= produk.unit %>
+          </p>
+        </div>
+
+        <div class="detail__info">
+          <h1><%= produk.name %></h1>
+          <p class="detail__desc">
+            Tersedia satuan <strong><%= produk.unit %></strong> di kategori
+            <strong><%= produk.category %></strong>. Harga dapat berubah
+            sewaktu-waktu mengikuti kondisi pasar.
+          </p>
+          <a href="/produk" class="btn btn--primary">Kembali ke Papan Harga</a>
+        </div>
+      </article>
+    <% } %>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

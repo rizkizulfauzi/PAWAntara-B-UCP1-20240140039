@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <main class="section section--narrow">
+    <p class="eyebrow">Bantuan cepat</p>
+    <h1>Tanya AI</h1>
+    <p class="hero__lead" style="margin-bottom:1.5rem;">
+      Tulis pertanyaanmu seputar toko. <em>(Balasan otomatis aktif di Sprint 2)</em>
+    </p>
+
+    <section class="chat" aria-label="Riwayat percakapan">
+      <ul id="chat-log" class="chat__log">
+        <li class="bubble bubble--ai">Halo! Ada yang bisa dibantu seputar Toko Ariesta?</li>
+      </ul>
+    </section>
+
+    <form id="chat-form" class="chat-form" aria-label="Form Tanya AI">
+      <label for="chat-message" class="sr-only">Tulis pertanyaan kamu</label>
+      <input
+        type="text"
+        id="chat-message"
+        name="message"
+        placeholder="Contoh: gula sekilo berapa?"
+        required
+      />
+      <button type="submit" class="btn btn--primary">Kirim</button>
+    </form>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

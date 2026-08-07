@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <main class="section-wrap section-wrap--sempit">
+    <% if (!ditemukan) { %>
+      <section class="pesan-404" aria-label="Produk tidak ditemukan">
+        <h1>😕 Produk Tidak Ditemukan</h1>
+        <p>Maaf, produk dengan ID tersebut tidak ada di daftar kami.</p>
+        <a href="/produk" class="btn-utama">Kembali ke Katalog</a>
+      </section>
+    <% } else { %>
+      <nav aria-label="breadcrumb" class="breadcrumb">
+        <a href="/">Beranda</a> &rsaquo;
+        <a href="/produk">Produk</a> &rsaquo;
+        <span><%= produk.nama %></span>
+      </nav>
+
+      <article class="detail-produk">
+        <aside class="detail-produk__gambar" aria-hidden="true">📦</aside>
+        <div class="detail-produk__info">
+          <span class="kartu-produk__kategori"><%= produk.kategori %></span>
+          <h1><%= produk.nama %></h1>
+          <p class="detail-produk__deskripsi"><%= produk.deskripsi %></p>
+          <p class="detail-produk__harga">
+            Rp<%= produk.harga.toLocaleString('id-ID') %> <small>/ <%= produk.satuan %></small>
+          </p>
+          <p class="detail-produk__stok">Stok tersedia: <strong><%= produk.stok %></strong></p>
+          <a href="/produk" class="btn-utama">Kembali ke Katalog</a>
+        </div>
+      </article>
+    <% } %>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>
