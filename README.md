@@ -1,8 +1,8 @@
 # Toko Sembako Ariesta — Papan Harga Digital
 
-**Nama:** _(isi nama kamu)_
-**NIM:** _(isi NIM kamu)_
-**Kelas:** _(isi kelas kamu)_
+**Nama:** _(Muhammad Rizki Zulfauzi)_
+**NIM:** _(20240140039)_
+**Kelas:** _(B)_
 
 ## Deskripsi Singkat
 
@@ -35,23 +35,56 @@ Server berjalan di `http://localhost:3000`.
 ## Struktur Folder
 
 ```
-ariesta-modern/
+PAWAntara-[Kelas]-UCP1-[NIM]/
+│
 ├── app.js
-├── data/products.js
-├── middleware/logger.js
+├── package.json
+├── package-lock.json
+├── README.md
+├── .gitignore
+│
+├── controllers/
+│   ├── apiController.js
+│   ├── authController.js
+│   └── pageController.js
+│
+├── middleware/
+│   ├── auth.js
+│   └── logger.js
+│
 ├── routes/
-│   ├── pages.js
-│   └── api.js
-├── views/
-│   ├── partials/ (navbar, footer, head)
-│   ├── index.ejs
-│   ├── produk.ejs
-│   ├── produk-detail.ejs
-│   └── tanya-ai.ejs
+│   ├── apiRoutes.js
+│   └── webRoutes.js
+│
+├── data/
+│   ├── products.js
+│   └── users.js
+│
 ├── public/
-│   ├── css/style.css
-│   └── js/main.js
-└── package.json
+│   ├── css/
+│   │   └── style.css
+│   │
+│   ├── js/
+│   │   ├── dashboard.js
+│   │   ├── login.js
+│   │   ├── produk.js
+│   │   └── tanya-ai.js
+│   │
+│   └── images/
+│       └── ...
+│
+└── views/
+    ├── beranda.ejs
+    ├── login.ejs
+    ├── dashboard.ejs
+    ├── produk.ejs
+    ├── detail-produk.ejs
+    ├── tanya-ai.ejs
+    ├── 404.ejs
+    │
+    └── partials/
+        ├── navbar.ejs
+        └── footer.ejs
 ```
 
 ## Daftar Halaman (Sprint 1)
