@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><%- include('../partials/head') %></head>
+<body>
+  <%- include('../partials/navbar') %>
+  <main class="section">
+    <div class="admin-heading"><div><p class="eyebrow">Panel pengelolaan</p><h1>Dashboard Admin</h1><p>Login sebagai <strong><%= user.username %></strong>. Data disimpan in-memory selama server berjalan.</p></div><button id="logout-btn" class="btn btn--ghost">Logout</button></div>
+    <section class="admin-grid">
+      <article class="admin-card"><h2 id="form-title">Tambah Produk</h2>
+        <form id="product-form" class="stack-form">
+          <input type="hidden" id="product-id" />
+          <label for="name">Nama produk</label><input id="name" required />
+          <label for="category">Kategori</label><input id="category" required placeholder="beras" />
+          <label for="price">Harga</label><input id="price" type="number" min="0" required />
+          <label for="stock">Stok</label><input id="stock" type="number" min="0" required />
+          <label for="unit">Satuan</label><input id="unit" value="pcs" required />
+          <label for="description">Deskripsi</label><textarea id="description" rows="4"></textarea>
+          <div class="form-actions"><button class="btn btn--primary" type="submit">Simpan</button><button id="cancel-edit" class="btn btn--ghost" type="button" hidden>Batal Edit</button></div>
+          <p id="admin-message" role="status"></p>
+        </form>
+      </article>
+      <article class="admin-card"><h2>Data Produk</h2><div id="admin-products" class="admin-products" aria-live="polite">Memuat...</div></article>
+    </section>
+  </main>
+  <%- include('../partials/footer') %>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

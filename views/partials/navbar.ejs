@@ -1,40 +1,13 @@
 <header class="navbar">
   <div class="navbar__inner">
-    <a href="/" class="navbar__brand">
-      <span class="navbar__brand-mark">AR</span>
-      <span class="navbar__brand-text">Toko Sembako<br />Ariesta</span>
-    </a>
-
+    <a href="/" class="navbar__brand"><span class="navbar__brand-mark">AR</span><span class="navbar__brand-text">Toko Sembako<br />Ariesta</span></a>
     <ul class="navbar__menu" aria-label="Menu utama">
       <li><a href="/" class="<%= activePage === 'beranda' ? 'is-active' : '' %>">Beranda</a></li>
       <li><a href="/produk" class="<%= activePage === 'produk' ? 'is-active' : '' %>">Produk</a></li>
       <li><a href="/tanya-ai" class="<%= activePage === 'tanya-ai' ? 'is-active' : '' %>">Tanya AI</a></li>
+      <% if (user) { %><li><a href="/admin" class="<%= activePage === 'admin' ? 'is-active' : '' %>">Dashboard</a></li><% } else { %><li><a href="/login" class="<%= activePage === 'login' ? 'is-active' : '' %>">Login</a></li><% } %>
     </ul>
-
-    <button
-      id="hamburger-btn"
-      class="navbar__toggle"
-      type="button"
-      aria-label="Buka menu navigasi"
-      aria-expanded="false"
-      aria-controls="mobile-menu"
-    >
-      <svg id="icon-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <line x1="3" y1="6" x2="21" y2="6"></line>
-        <line x1="3" y1="12" x2="21" y2="12"></line>
-        <line x1="3" y1="18" x2="21" y2="18"></line>
-      </svg>
-      <svg id="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none">
-        <line x1="5" y1="5" x2="19" y2="19"></line>
-        <line x1="19" y1="5" x2="5" y2="19"></line>
-      </svg>
-    </button>
+    <button id="hamburger-btn" class="navbar__toggle" type="button" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="mobile-menu"><svg id="icon-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg><svg id="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg></button>
   </div>
-
-  <ul id="mobile-menu" class="navbar__mobile-menu" hidden>
-    <li><a href="/">Beranda</a></li>
-    <li><a href="/produk">Produk</a></li>
-    <li><a href="/tanya-ai">Tanya AI</a></li>
-  </ul>
+  <ul id="mobile-menu" class="navbar__mobile-menu" hidden><li><a href="/">Beranda</a></li><li><a href="/produk">Produk</a></li><li><a href="/tanya-ai">Tanya AI</a></li><% if (user) { %><li><a href="/admin">Dashboard</a></li><% } else { %><li><a href="/login">Login</a></li><% } %></ul>
 </header>
-

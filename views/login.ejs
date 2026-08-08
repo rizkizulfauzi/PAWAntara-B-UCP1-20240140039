@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><%- include('partials/head') %></head>
+<body>
+  <%- include('partials/navbar') %>
+  <main class="section section--narrow">
+    <section class="auth-card" aria-labelledby="login-title">
+      <p class="eyebrow">Area terbatas</p><h1 id="login-title">Login Admin/Kasir</h1>
+      <p>Masuk untuk mengelola harga dan stok produk.</p>
+      <form id="login-form" class="stack-form">
+        <label for="username">Username</label><input id="username" name="username" autocomplete="username" required />
+        <label for="password">Password</label><input id="password" name="password" type="password" autocomplete="current-password" required />
+        <button class="btn btn--primary" type="submit">Login</button>
+        <p id="login-error" class="form-error" role="alert"></p>
+      </form>
+      <small>Demo pemeriksaan: username <strong>admin</strong>, password <strong>admin123</strong>.</small>
+    </section>
+  </main>
+  <%- include('partials/footer') %>
+  <script src="/js/login.js"></script>
+</body>
+</html>

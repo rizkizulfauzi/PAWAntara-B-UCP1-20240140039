@@ -1,59 +1,155 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-  <%- include('partials/head') %>
+  <%- include("partials/head") %>
 </head>
+
 <body>
-  <%- include('partials/navbar') %>
 
-  <main class="section-wrap">
-    <h1>Katalog Produk</h1>
+  <%- include("partials/navbar") %>
 
-    <form method="GET" action="/produk" class="form-filter" aria-label="Filter produk">
-      <div class="form-filter__field">
-        <label for="search">Cari nama produk</label>
-        <input
-          type="text"
-          id="search"
-          name="search"
-          value="<%= filterSearch %>"
-          placeholder="mis. gula"
-        />
+  <main>
+
+    <!-- =========================
+         HEADER KATALOG
+         ========================= -->
+    <section class="section">
+
+      <div class="container">
+
+        <p class="eyebrow">
+          Katalog
+        </p>
+
+        <h1>
+          Produk Toko Ariesta
+        </h1>
+
+        <p>
+          Temukan berbagai kebutuhan sembako
+          dengan harga dan stok yang selalu diperbarui.
+        </p>
+
       </div>
 
-      <div class="form-filter__field">
-        <label for="kategori">Kategori</label>
-        <select id="kategori" name="kategori">
-          <option value="">Semua</option>
-          <% semuaKategori.forEach(function(k) { %>
-            <option value="<%= k %>" <%= filterKategori === k ? 'selected' : '' %>>
-              <%= k.charAt(0).toUpperCase() + k.slice(1) %>
-            </option>
-          <% }); %>
-        </select>
+    </section>
+
+
+    <!-- =========================
+         FILTER & SEARCH
+         ========================= -->
+    <section class="section">
+
+      <div class="container">
+
+        <form
+          id="filter-form"
+          class="filter-form"
+        >
+
+          <div class="form-group">
+
+            <label for="search">
+              Cari Produk
+            </label>
+
+            <input
+              type="search"
+              id="search"
+              name="search"
+              placeholder="Contoh: beras"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="kategori">
+              Kategori
+            </label>
+
+            <select
+              id="kategori"
+              name="kategori"
+            >
+
+              <option value="">
+                Semua Kategori
+              </option>
+
+              <option value="beras">
+                Beras
+              </option>
+
+              <option value="minyak">
+                Minyak
+              </option>
+
+              <option value="gula">
+                Gula
+              </option>
+
+              <option value="sembako">
+                Sembako
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="btn btn--primary"
+          >
+            Cari Produk
+          </button>
+
+        </form>
+
       </div>
 
-      <button type="submit" class="btn-utama">Cari</button>
-      <a href="/produk" class="btn-teks">Reset filter</a>
-    </form>
+    </section>
 
-    <% if (daftarProduk.length === 0) { %>
-      <p class="pesan-kosong">Belum ada produk yang cocok dengan pencarianmu.</p>
-    <% } else { %>
-      <div class="daftar-produk daftar-produk--flex">
-        <% daftarProduk.forEach(function(p) { %>
-          <article class="kartu-produk">
-            <span class="kartu-produk__kategori"><%= p.kategori %></span>
-            <h2><%= p.nama %></h2>
-            <p class="kartu-produk__harga">Rp<%= p.harga.toLocaleString('id-ID') %> <small>/ <%= p.satuan %></small></p>
-            <p class="kartu-produk__stok">Stok: <%= p.stok %></p>
-            <a href="/produk/<%= p.id %>" class="btn-sekunder">Lihat Detail</a>
-          </article>
-        <% }); %>
+
+    <!-- =========================
+         DAFTAR PRODUK
+         ========================= -->
+    <section class="section">
+
+      <div class="container">
+
+        <div
+          id="product-list"
+          class="product-grid"
+        >
+          <!-- Produk akan dimasukkan
+               melalui Fetch API -->
+        </div>
+
+
+        <p
+          id="empty-message"
+          hidden
+        >
+          Produk tidak ditemukan.
+        </p>
+
       </div>
-    <% } %>
+
+    </section>
+
   </main>
 
-  <%- include('partials/footer') %>
+
+  <%- include("partials/footer") %>
+
+
+  <!-- JavaScript Fetch API -->
+  <script src="/js/katalog.js"></script>
+
 </body>
+
 </html>
