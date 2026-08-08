@@ -1,74 +1,97 @@
-// controllers/pageController.js
-// Berisi logic untuk setiap halaman yang di-render server-side (EJS).
+const products = require("../data/produk");
 
-const daftarProduk = require("../data/produk");
-
-// GET / -> Beranda
 exports.beranda = (req, res) => {
-  const unggulan = daftarProduk.slice(0, 4); // preview 4 produk pertama
-  res.render("beranda", {
-    judul: "Ariesta Mart - Belanja Sembako Online",
-    halamanAktif: "beranda",
-    unggulan,
+  res.render("index", {
+    title: "Toko Sembako Ariesta — Papan Harga Digital",
+    activePage: "beranda",
+    unggulan: products.slice(0, 4),
+    tickerItems: products
   });
 };
 
-// GET /produk -> Katalog produk + filter query string
 exports.katalog = (req, res) => {
-  const { kategori, search } = req.query;
-  let hasil = [...daftarProduk];
+  const searchQuery = req.query.search || "";
+  const selectedKategori = req.query.kategori || "";
 
-  if (kategori) {
-    hasil = hasil.filter(
-      (item) => item.kategori.toLowerCase() === String(kategori).toLowerCase()
+  // Ambil daftar kategori dari data produk
+  const kategoriList = [
+    ...new Set(
+      products.map((product) => product.category)
+    )
+  ];
+
+  let produkList = products;
+
+  // Filter berdasarkan pencarian
+  if (searchQuery) {
+    produkList = produkList.filter((product) =>
+      product.name
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase())
     );
   }
 
-  if (search) {
-    const kataKunci = String(search).toLowerCase();
-    hasil = hasil.filter((item) =>
-      item.nama.toLowerCase().includes(kataKunci)
+  // Filter berdasarkan kategori
+  if (selectedKategori) {
+    produkList = produkList.filter(
+      (product) =>
+        product.category.toLowerCase() ===
+        selectedKategori.toLowerCase()
     );
   }
 
-  const semuaKategori = [...new Set(daftarProduk.map((item) => item.kategori))];
-
-  res.render("katalog", {
-    judul: "Katalog Produk - Ariesta Mart",
-    halamanAktif: "produk",
-    daftarProduk: hasil,
-    semuaKategori,
-    filterKategori: kategori || "",
-    filterSearch: search || "",
+  res.render("produk", {
+    title: "Produk",
+    produkList,
+    searchQuery,
+    selectedKategori,
+    kategoriList,
+    activePage: "produk"
   });
 };
 
-// GET /produk/:id -> Detail produk (route dinamis)
+
 exports.detailProduk = (req, res) => {
   const id = Number(req.params.id);
-  const produk = daftarProduk.find((item) => item.id === id);
+  const produk = products.find((p) => p.id === id);
 
   if (!produk) {
-    return res.status(404).render("detail-produk", {
-      judul: "Produk Tidak Ditemukan - Ariesta Mart",
-      halamanAktif: "produk",
+    return res.status(404).render("produk-detail", {
+      title: "Produk Tidak Ditemukan — Toko Sembako Ariesta",
+      activePage: "produk",
       produk: null,
-      ditemukan: false,
+      notFound: true
     });
   }
 
-  res.render("detail-produk", {
-    judul: `${produk.nama} - Ariesta Mart`,
-    halamanAktif: "produk",
+  res.render("produk-detail", {
+    title: `${produk.name} — Toko Sembako Ariesta`,
+    activePage: "produk",
     produk,
-    ditemukan: true,
+    notFound: false
   });
 };
 
-// GET /tanya-ai -> Halaman chat (logic balasan menyusul Sprint 2)
 exports.tanyaAI = (req, res) => {
   res.render("tanya-ai", {
-    judul: "Tanya AI - Ariesta Mart",
-    halamanAktif: "tanya-ai",
+    title: "Tanya AI — Toko Sembako Ariesta",
+    activePage: "tanya-ai"
+  });
+};
+
+exports.login = (req, res) => {
+  if (req.user) return res.redirect("/admin");
+  res.render("login", {
+    title: "Login Admin — Toko Sembako Ariesta",
+    activePage: "login",
+    error: null
+  });
+};
+
+exports.admin = (req, res) => {
+  res.render("admin/dashboard", {
+    title: "Dashboard Admin — Toko Sembako Ariesta",
+    activePage: "admin",
+    user: req.user
   });
 };
