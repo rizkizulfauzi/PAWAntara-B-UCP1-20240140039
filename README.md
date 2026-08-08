@@ -65,13 +65,13 @@ PAWAntara-[Kelas]-UCP1-[NIM]/
 │   │   └── style.css
 │   │
 │   ├── js/
-│   │   ├── dashboard.js
-│   │   ├── login.js
-│   │   ├── produk.js
-│   │   └── tanya-ai.js
-│   │
-│   └── images/
-│       └── ...
+│       ├── dashboard.js
+│       ├── login.js
+│       ├── produk.js
+│       └── tanya-ai.js
+│   
+│   
+│       
 │
 └── views/
     ├── beranda.ejs
@@ -80,7 +80,6 @@ PAWAntara-[Kelas]-UCP1-[NIM]/
     ├── produk.ejs
     ├── detail-produk.ejs
     ├── tanya-ai.ejs
-    ├── 404.ejs
     │
     └── partials/
         ├── navbar.ejs
